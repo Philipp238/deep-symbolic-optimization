@@ -304,4 +304,7 @@ class GPController:
 
 
     def __del__(self):
-        del self.creator.FitnessMin
+        try:
+            del self.creator.FitnessMin
+        except AttributeError as e:
+            print(f'!!! While trying to delete Fitness min the following exception occured: {e}')

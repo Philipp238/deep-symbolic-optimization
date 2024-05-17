@@ -111,6 +111,8 @@ class DeepSymbolicOptimizer():
         from time import time
         t0 = time()
 
+        from time import time
+        t0 = time()
         # Setup the model
         self.setup()
 
