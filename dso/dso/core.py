@@ -101,18 +101,24 @@ class DeepSymbolicOptimizer():
         if self.trainer.done:
             return self.finish()
 
-    def train(self):
+    def train(self, time_limit=None):
         """
         Train the model until completion.
         """
 
+        from time import time
+        t0 = time()
         # Setup the model
         self.setup()
 
         # Train the model until done
         while not self.trainer.done:
             result = self.train_one_step()
-
+            t1 = time()
+            if time_limit and (time_limit<t1-t0):
+                print('Stop training; timelimit was reached')
+                self.finish()
+                self.trainer.done = True
         return result
 
     def finish(self):
